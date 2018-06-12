@@ -1,0 +1,42 @@
+include includes/header2.pug
+
+.container
+	.py-5.text-center
+		h2 Search
+		p.lead Find recipes by name or tag
+	.row.justify-content-center
+		.col-md-8.order-md-1
+			form(method="post" action="/search")
+				div.centered
+					.col-md-8.mb-3
+						input#name.form-control(type="text" name="name" placeholder="Recipe name" value="")
+				hr.my-4
+				div
+					h5 Tags
+					.d-inline-flex.my-4
+						each tag, i in tags
+							div.px-3
+								label.container
+									| #{tag}
+									input#tag(name="tag" + i type="checkbox" value=tag)
+									span.checkmark
+				hr.mb-5
+				button.btn.btn-primary.btn-lg.btn-block(type="submit") Search
+	if message
+		hr.my-5
+		.row
+			p.lead #{message}
+			.album.py-5.bg-light
+				.container
+					.row
+						each recipe, i in recipes
+							.col-sm-4
+								.card.mb-4.box-shadow
+									img.card-img-top(src='pictures/' + recipe.pic alt='Picture of ' + recipe.name)
+									.card-body
+										h4.card-title.text-center #{recipe.name}
+										p.card-text
+											| #{recipe.desc}
+											span.font-italic  (Ingredients: #{recipe.ingredients.map(ing => {return ing.replace(/[0-9\/]+ ((cup|lb|T.?|t.?|oz) )?/i, '');}).join(', ')})
+										.text-center
+											a.btn.btn-sm.btn-outline-secondary(role="button" href="/recipe/" + recipe.name) Make it!
