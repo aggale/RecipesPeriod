@@ -7,6 +7,10 @@ var recipeSchema = new Schema({
     type: String,
     required: true
   },
+  recipeName: {
+    type: String,
+    required: true
+  },
   desc: {
     type: String,
     required: true
@@ -19,11 +23,13 @@ var recipeSchema = new Schema({
     required: true
   },
   ingredients: {
-    type: [String],
+    type: 'list',
+    list: [String],
     required: true
   },
   steps: {
-    type: [String],
+    type: 'list',
+    list: [String],
     required: true
   },
   tags: {

@@ -37,6 +37,6 @@ include includes/header2.pug
 										h4.card-title.text-center #{recipe.name}
 										p.card-text
 											| #{recipe.desc}
-											span.font-italic  (Ingredients: #{recipe.ingredients.map(ing => {return ing.replace(/[0-9\/]+ ((cup|lb|T.?|t.?|oz) )?/i, '');}).join(', ')})
+											span.font-italic  (Ingredients: #{recipe.ingredients.replace(/\[|\]|\"/g, "").split(',').map(ing => {return ing.replace(/[0-9\/ ]+ ((c.|cup|lb|lbs|T.?|t.?|oz) )?/i, '');}).join(', ')})
 										.text-center
 											a.btn.btn-sm.btn-outline-secondary(role="button" href="/recipe/" + recipe.name) Make it!

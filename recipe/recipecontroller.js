@@ -8,8 +8,17 @@ var Recipe = require('./recipe');
 
 // Return a recipe
 router.get('/:name', function (req, res) {
-  console.log(req.params.name);
-  Recipe.scan({name: req.params.name}, function (err, recipe) {
+  console.log(req.params);
+  var filter = {
+    FilterExpression: '#n = :m',
+    ExpressionAttributeNames: {
+      "#n": "name"
+    },
+    ExpressionAttributeValues: {
+      ":m": req.params.name
+    }
+  };
+  Recipe.scan(filter).exec(function (err, recipe) {
     if (err)
       return res.status(500).send("There was a problem finding the recipe. " + err);
     if (!recipe)
@@ -24,8 +33,11 @@ router.post('/', function (req, res) {
   var ingredients = req.body.ingredients.split("\r\n").map(s => s.trim());
   var steps = req.body.steps.split("\r\n").map(s => s.trim());
   var tags = req.body.tags.split(",").map(s => s.trim());
+  var recipeName = req.body.name.toLowerCase().replace("-", " ");
+  console.log(steps);
   Recipe.create({
     name: req.body.name,
+    recipeName: recipeName,
     desc: req.body.desc,
     extended_desc: req.body.extended_desc,
     pic: req.body.pic,
@@ -34,8 +46,10 @@ router.post('/', function (req, res) {
     tags: tags
   },
   function (err, user) {
+    console.log("err: " + err);
     if (err)
       return res.status(500).send("There was a problem adding the recipe to the database. " + err)
+    console.log(user.name + " successfully added.");
     res.status(200).send(user.name + " successfully added.");
   });
 });
@@ -52,6 +66,8 @@ router.delete('/:name', function (req, res) {
 // Update a recipe
 router.put('/:name', function (req, res) {
   req.body.tags = req.body.tags.split(",").map(s => s.trim());
+  req.body.ingredients = req.body.ingredients.replace(/\r\n$/, "").split("\r\n");
+  req.body.steps = req.body.steps.replace(/\r\n$/, "").split("\r\n");
   Recipe.update({name: req.params.name}, req.body, function (err) {
     if (err)
       return res.status(500).send("Recipe could not be updated.");

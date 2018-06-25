@@ -15,14 +15,14 @@ main.container(role="main")
 		.col-8
 			h3.text-center Ingredients:
 			.list-group.text-center
-				each ingredient in recipe.ingredients
+				each ingredient in recipe.ingredients.replace(/\[\"|\"\]|/g, "").split('\",\"')
 					.list-group-item #{ingredient}
 
 	.row.justify-content-center
 		.col-8
 			h3 Directions:
 			ol#directions
-				each step in recipe.steps
+				each step in recipe.steps.replace(/\[\"|\"\]|/g, "").split('\",\"')
 					li #{step}
 	#last-item.row.justify-content-center
 		a.btn.btn-sm.btn-dark(role="button" href="/recipe/all") All Recipes

@@ -11,7 +11,6 @@ var db = new AWS.DynamoDB.DocumentClient();
 
 var indexRouter = require('./routes/index');
 var aboutRouter = require('./routes/about');
-var allrecipesRouter = require('./routes/allrecipes');
 var recipeRouter = require('./routes/recipe');
 var searchRouter = require('./routes/search');
 var apiRouter = require('./recipe/recipecontroller');

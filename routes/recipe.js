@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var tableName = 'recipe';
+var tableName = 'Recipe';
 
 router.get('/all', function(req, res){
 	var db = req.db;
@@ -14,6 +14,9 @@ router.get('/all', function(req, res){
 		if (err) {
 			console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
 		} else {
+			//data.Items.forEach(i => console.log(i.name + " " + i.ingredients['values']));
+			//console.log(data.Items[0].ingredients['values']);
+			console.log(data.Items)
 			res.render('allrecipes', {
 					isactive: "browse",
 			 		recipes: data.Items
@@ -24,18 +27,6 @@ router.get('/all', function(req, res){
 
 router.get('/:recipeId', function(req, res){
 	var db = req.db;
-	//var collection = db.collection('recipe');
-
-	// collection.find({'name': req.params.recipeId}).toArray(function(err, docs){
-	// 	if(err){
-	// 		console.log("err: " + err);
-	// 		return console.dir(err);
-	// 	}
-	//
-	// 	res.render('recipe', {
-	// 		recipe: docs[0]
-	// 	});
-	// });
 	var params = {
 		TableName: tableName,
 		Key:{
@@ -43,13 +34,19 @@ router.get('/:recipeId', function(req, res){
 		}
 	};
 	db.get(params, function(err, data){
-		if (err){
+		if (err) {
 			console.log("err: " + JSON.stringify(err, null, 2));
+			res.status(500).send("An error occurred contacting the database.");
 		}
-		res.render('recipe', {
-			//recipe: docs[0]
-			recipe: data.Item
-		});
+		else if (data.Item == undefined){
+			res.status(500).send("Could not locate recipe.");
+		} else {
+			console.log(data.Item);
+			res.render('recipe', {
+				//recipe: docs[0]
+				recipe: data.Item
+			});
+		}
 	});
 });
 

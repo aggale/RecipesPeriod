@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var tags = [];
 
-var tableName = 'recipe';
+var tableName = 'Recipe';
 
 router.get('/', function(req, res){
 	var db = req.db;
@@ -14,10 +14,11 @@ router.get('/', function(req, res){
     if (err) {
       console.error("Unable to query. Error: ", JSON.stringify(err, null, 2));
     } else {
+			console.log(data.Items[0]['tags'].values);
 			tags = data.Items.reduce((total, item) => {
-				for (var i = 0; i < item.tags.length; i++) {
-					if (!total.includes(item.tags[i])) {
-							total.push(item.tags[i]);
+				for (var i = 0; i < item.tags.values.length; i++) {
+					if (!total.includes(item.tags.values[i])) {
+							total.push(item.tags.values[i]);
 					}
 				}
 				return total;
