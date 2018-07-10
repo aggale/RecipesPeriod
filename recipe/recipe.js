@@ -16,7 +16,20 @@ var recipeSchema = new Schema({
     required: true
   },
   extended_desc: {
-    type: String
+    type: String,
+    required: true
+  },
+  serves: {
+    type: Number,
+    required: true
+  },
+  time: {
+    type: String,
+    required: true
+  },
+  difficulty: {
+    type: String,
+    require: true
   },
   pic: {
     type: String,

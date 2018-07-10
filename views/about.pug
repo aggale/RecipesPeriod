@@ -11,5 +11,21 @@ include includes/header2.pug
     ul
       li Cook from scratch
       li Use fresh, healthy ingredients
-      li Make cooking Simple
-  p To get started, you can browse all recipes or search for something in particular.
+      li Make cooking simple
+  p
+  | To get started, you can browse
+  a(href="/recipe/all")  all recipes
+  |  or
+  a(href="/search")  search
+  |  for something in particular.
+.container.mt-5
+  .row
+    .col-md-4
+      a(href="/recipe/Cherry-Chipotle%20Steak%20for%20Tacos")
+        img.img-fluid(src='../pictures/cherrychipotle.jpg')
+    .col-md-4
+      a(href="/recipe/Gluten-Free%20Strawberry%20Pie")
+        img.img-fluid(src='../pictures/strawberry_pie.jpg')
+    .col-md-4
+      a(href="/recipe/Fruity%20Spring%20Eclairs")
+        img.img-fluid(src='../pictures/eclairs.jpg')

@@ -11,6 +11,17 @@ main.container(role="main")
 		.col-6
 			p.lead.text-center
 				| #{recipe.desc}
+
+	.row.justify-content-center
+		.col-8.border
+			.row.justify-content-center.py-0.mt-2.mb-0
+				p.font-weight-bold.text-center.mb-0 Serves: #{recipe.serves}
+			.row.justify-content-center.py-0.mt-0
+				p.font-weight-bold.text-center.mb-0 Difficulty: #{recipe.difficulty}
+			.row.justify-content-center.py-0.mt-0
+				p.font-weight-bold.text-center Cook Time: #{recipe.time}
+			.row.justify-content-center.py-0
+				p.text-center #{recipe.extended_desc}
 	.row.justify-content-center
 		.col-8
 			h3.text-center Ingredients:
