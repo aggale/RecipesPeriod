@@ -1,0 +1,47 @@
+/* Cover main page */
+.cover-container {
+	background: url('https://s3.us-east-2.amazonaws.com/elasticbeanstalk-us-east-2-974097999386/pictures/jam.jpg') no-repeat center center fixed;
+	-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+	justify-content: center;
+}
+a,
+a:focus,
+a:hover {
+  color: #fff;
+}
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color: #333;
+  text-shadow: none; /* Prevent inheritance from `body` */
+  background-color: #fff;
+  border: .05rem solid #fff;
+}
+html,
+body {
+  height: 100%;
+  background-color: #333;
+}
+body {
+  display: -ms-flexbox;
+  display: flex;
+  color: #fff;
+  text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+}
+.cover {
+  padding: 0px 1.5rem;
+	margin: 100px auto auto auto;
+	width: 50%;
+	max-width: 42em;
+}
+.cover .lead{
+	font-size: 28px;
+}
+.cover .btn-lg {
+  padding: .75rem 1.25rem;
+  font-weight: 700;
+}
