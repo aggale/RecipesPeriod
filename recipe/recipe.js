@@ -48,6 +48,11 @@ var recipeSchema = new Schema({
   tags: {
     type: [String],
     required: true
+  },
+  show: {
+    type: Boolean,
+    required: true,
+    default: true
   }
 });
 var Model = dynamoose.model('Recipe', recipeSchema);

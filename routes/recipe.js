@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var url = require('url');
 
 var tableName = 'Recipe';
 
@@ -16,7 +17,6 @@ router.get('/all', function(req, res){
 		} else {
 			//data.Items.forEach(i => console.log(i.name + " " + i.ingredients['values']));
 			//console.log(data.Items[0].ingredients['values']);
-			console.log(data.Items)
 			res.render('allrecipes', {
 					isactive: "browse",
 			 		recipes: data.Items
@@ -41,10 +41,14 @@ router.get('/:recipeId', function(req, res){
 		else if (data.Item == undefined){
 			res.status(500).send("Could not locate recipe.");
 		} else {
-			console.log(data.Item);
 			res.render('recipe', {
 				//recipe: docs[0]
-				recipe: data.Item
+				recipe: data.Item,
+				fullurl: url.format({
+					protocol: req.protocol,
+					host: req.get('host'),
+					pathname: req.originalUrl
+				})
 			});
 		}
 	});

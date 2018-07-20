@@ -12,14 +12,15 @@ main(role="main")
 		.container
 			.row
 				each recipe, i in recipes
-					.col-md-4
-						.card.mb-4.box-shadow
-							a(href="/recipe/" + recipe.name)
-								img.card-img-top(src='../pictures/' + recipe.pic alt='Picture of ' + recipe.name)
-							.card-body
-								h4.card-title.text-center #{recipe.name}
-								p.card-text
-									| #{recipe.desc}
-									span.font-italic  (Ingredients: #{recipe.ingredients.replace(/\[|\]|\"/g, "").split(',').map(ing => {return ing.replace(/[0-9\/ ]+ ((c.?|cup|lb.?|lbs|T.?|t.?|oz) )?/i, '');}).join(', ')})
-								.text-center
-									a.btn.btn-sm.btn-outline-secondary(role="button" href="/recipe/" + recipe.name) Make it!
+					if recipe.show == true
+						.col-md-4
+							.card.mb-4.box-shadow
+								a(href="/recipe/" + recipe.name)
+									img.card-img-top(src="https://s3.us-east-2.amazonaws.com/elasticbeanstalk-us-east-2-974097999386/pictures/" + recipe.pic alt='Picture of ' + recipe.name)
+								.card-body
+									h4.card-title.text-center #{recipe.name}
+									p.card-text
+										| #{recipe.desc}
+										span.font-italic  (Ingredients: #{recipe.ingredients.replace(/\[|\]|\"/g, "").split(',').map(ing => {return ing.replace(/[0-9\/ ]+ ((c.?|cup|lb.?|lbs|T.?|t.?|oz) )?/i, '');}).join(', ')})
+									.text-center
+										a.btn.btn-sm.btn-outline-secondary(role="button" href="/recipe/" + recipe.name) Make it!

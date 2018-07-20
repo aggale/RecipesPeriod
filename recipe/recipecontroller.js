@@ -6,6 +6,9 @@ router.use(bodyParser.json());
 
 var Recipe = require('./recipe');
 
+// Validate user
+
+
 // Return a recipe
 router.get('/:name', function (req, res) {
   console.log(req.params);
@@ -46,7 +49,8 @@ router.post('/', function (req, res) {
     pic: req.body.pic,
     ingredients: ingredients,
     steps: steps,
-    tags: tags
+    tags: tags,
+    show: req.body.show === "true"
   },
   function (err, user) {
     console.log("err: " + err);
